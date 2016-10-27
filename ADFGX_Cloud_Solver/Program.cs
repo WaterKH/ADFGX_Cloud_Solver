@@ -13,25 +13,25 @@ namespace ADFGX_Cloud_Solver
         /// </summary>
         [STAThread]
         static void Main()
-        {
-<<<<<<< HEAD
+		{
             if (!System.IO.File.Exists("ADFGX_Cloud_Solver.exe.config"))
-=======
-            if (!IsRunningOnMono())
->>>>>>> TheRealDF/master
+
+			#if __MonoCS__
+			//DO nothing
+			#else
+			if (!IsRunningOnMono())
             {
                 if (Environment.OSVersion.Version.Major >= 6)
                     SetProcessDPIAware();
             }
+			#endif
 
-                System.IO.File.WriteAllText("ADFGX_Cloud_Solver.exe.config", Properties.Resources.ADFGX_Cloud_Solver_exe);
+            System.IO.File.WriteAllText("ADFGX_Cloud_Solver.exe.config", Properties.Resources.ADFGX_Cloud_Solver_exe);
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
         }
-<<<<<<< HEAD
-=======
 
         public static bool IsRunningOnMono()
         {
@@ -40,12 +40,13 @@ namespace ADFGX_Cloud_Solver
 
 #if __MonoCS__
  //mono specific code
+
+		//private static bool SetProcessDPIAware(){return true;}
 #else
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         private static extern bool SetProcessDPIAware();
 #endif
 
->>>>>>> TheRealDF/master
     }
 
 
